@@ -1,7 +1,10 @@
 """Barcode and QR Code generation service."""
 import qrcode
+# pyrefly: ignore [missing-import]
 import barcode
+# pyrefly: ignore [missing-import]
 from barcode.writer import ImageWriter
+# pyrefly: ignore [missing-import]
 from PIL import Image
 import io, os, uuid
 
