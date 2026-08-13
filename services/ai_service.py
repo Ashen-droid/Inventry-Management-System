@@ -4,6 +4,7 @@ from sklearn.linear_model import LinearRegression
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 from database import SaleItem, Sale, Product
+# pyrefly: ignore [missing-import]
 from sqlalchemy import func, extract
 import datetime
 
