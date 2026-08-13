@@ -1,7 +1,11 @@
 """Auth router: Login + Register."""
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, status, Request
+# pyrefly: ignore [missing-import]
 from fastapi.security import OAuth2PasswordRequestForm
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 

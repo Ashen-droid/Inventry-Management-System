@@ -1,7 +1,11 @@
 """Sales router: Create sale, auto-decrement stock, generate PDF invoice."""
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException
+# pyrefly: ignore [missing-import]
 from fastapi.responses import FileResponse
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
 from pydantic import BaseModel
 from typing import List, Optional
 import datetime, uuid
