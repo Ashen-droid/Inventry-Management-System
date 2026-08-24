@@ -415,6 +415,7 @@ a:hover {
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .card:hover {
@@ -447,6 +448,7 @@ a:hover {
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .stat-card::before {
