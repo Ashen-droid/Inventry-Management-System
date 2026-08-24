@@ -170,16 +170,16 @@ export default function AIInsights() {
             {prediction.historical_data && prediction.historical_data.length > 0 && (
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={prediction.historical_data}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                  <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 12 }} axisLine={false} />
-                  <YAxis tick={{ fill: '#94a3b8', fontSize: 12 }} axisLine={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                  <XAxis dataKey="month" tick={{ fill: '#475569', fontSize: 12 }} axisLine={false} />
+                  <YAxis tick={{ fill: '#475569', fontSize: 12 }} axisLine={false} />
                   <Tooltip
                     contentStyle={{
-                      background: '#1e293b', border: '1px solid rgba(255,255,255,0.1)',
-                      borderRadius: '8px', color: '#f1f5f9'
+                      background: '#FFFFFF', border: '1px solid #E2E8F0',
+                      borderRadius: '8px', color: '#0F172A'
                     }}
                   />
-                  <Bar dataKey="sales" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="sales" fill="#2563EB" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             )}

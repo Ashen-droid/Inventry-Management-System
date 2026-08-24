@@ -9,7 +9,7 @@ import {
   PieChart, Pie, Cell, Legend
 } from 'recharts'
 
-const PIE_COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#22c55e', '#3b82f6', '#14b8a6', '#f97316']
+const PIE_COLORS = ['#2563EB', '#3B82F6', '#22C55E', '#F59E0B', '#EF4444', '#0EA5E9', '#8B5CF6', '#F97316']
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null)
@@ -106,20 +106,20 @@ export default function Dashboard() {
           <h3>Monthly Sales Revenue</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={monthlySales}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-              <XAxis dataKey="label" tick={{ fill: '#94a3b8', fontSize: 12 }} axisLine={false} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 12 }} axisLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+              <XAxis dataKey="label" tick={{ fill: '#475569', fontSize: 12 }} axisLine={false} />
+              <YAxis tick={{ fill: '#475569', fontSize: 12 }} axisLine={false} />
               <Tooltip
                 contentStyle={{
-                  background: '#1e293b', border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: '8px', color: '#f1f5f9'
+                  background: '#FFFFFF', border: '1px solid #E2E8F0',
+                  borderRadius: '8px', color: '#0F172A'
                 }}
               />
               <Bar dataKey="revenue" fill="url(#barGradient)" radius={[6, 6, 0, 0]} />
               <defs>
                 <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#818cf8" />
-                  <stop offset="100%" stopColor="#6366f1" />
+                  <stop offset="0%" stopColor="#3B82F6" />
+                  <stop offset="100%" stopColor="#2563EB" />
                 </linearGradient>
               </defs>
             </BarChart>
@@ -147,8 +147,8 @@ export default function Dashboard() {
               </Pie>
               <Tooltip
                 contentStyle={{
-                  background: '#1e293b', border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: '8px', color: '#f1f5f9'
+                  background: '#FFFFFF', border: '1px solid #E2E8F0',
+                  borderRadius: '8px', color: '#0F172A'
                 }}
               />
             </PieChart>

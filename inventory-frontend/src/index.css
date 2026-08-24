@@ -202,7 +202,7 @@ a:hover {
   width: var(--sidebar-width);
   height: 100vh;
   background: var(--bg-sidebar);
-  border-right: 1px solid var(--border-primary);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
   z-index: 100;
@@ -216,7 +216,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  border-bottom: 1px solid var(--border-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   min-height: var(--topbar-height);
 }
 
@@ -236,10 +236,7 @@ a:hover {
 .sidebar-logo .logo-text {
   font-size: var(--font-lg);
   font-weight: 700;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #FFFFFF;
   white-space: nowrap;
 }
 
@@ -254,7 +251,7 @@ a:hover {
 .sidebar-section-label {
   font-size: var(--font-xs);
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--sidebar-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: var(--space-4) var(--space-3) var(--space-2);
@@ -266,7 +263,7 @@ a:hover {
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
-  color: var(--text-secondary);
+  color: var(--sidebar-text);
   font-size: var(--font-base);
   font-weight: 500;
   transition: all var(--transition-fast);
@@ -279,8 +276,8 @@ a:hover {
 }
 
 .sidebar-link:hover {
-  background: var(--surface-glass-hover);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--sidebar-text-active);
 }
 
 .sidebar-link.active {
@@ -349,7 +346,7 @@ a:hover {
 .topbar-search input:focus {
   outline: none;
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 .topbar-search .search-icon {
@@ -421,7 +418,8 @@ a:hover {
 }
 
 .card:hover {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: #CBD5E1;
+  box-shadow: var(--shadow-md);
 }
 
 .card-glass {
@@ -466,7 +464,7 @@ a:hover {
 .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: #CBD5E1;
 }
 
 .stat-card:hover::before {
@@ -645,7 +643,7 @@ a:hover {
 .form-textarea:focus {
   outline: none;
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 .form-select {
@@ -876,7 +874,7 @@ tbody tr:last-child td {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.1), transparent 70%);
   top: -100px;
   right: -100px;
   pointer-events: none;
@@ -887,7 +885,7 @@ tbody tr:last-child td {
   position: absolute;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06), transparent 70%);
   bottom: -100px;
   left: -100px;
   pointer-events: none;
@@ -1200,8 +1198,9 @@ tbody tr:last-child td {
 }
 
 .report-card:hover {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: #CBD5E1;
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .report-card h3 {
