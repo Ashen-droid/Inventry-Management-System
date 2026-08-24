@@ -1,5 +1,7 @@
 """Activity Log router."""
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, Query
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 from typing import Optional
 

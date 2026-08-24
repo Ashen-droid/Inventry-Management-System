@@ -3,8 +3,11 @@ import io, csv
 import datetime
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, Query
+# pyrefly: ignore [missing-import]
 from fastapi.responses import StreamingResponse
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
 from sqlalchemy import func
 
 from database import (get_db, Sale, SaleItem, Purchase, PurchaseItem,
