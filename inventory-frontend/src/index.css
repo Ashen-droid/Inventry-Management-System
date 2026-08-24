@@ -4,44 +4,50 @@
 
 /* ── CSS Custom Properties (Design Tokens) ── */
 :root {
-  /* Colors — Deep Navy Dark Theme */
-  --bg-primary: #0a0e1a;
-  --bg-secondary: #0f1629;
-  --bg-card: #151c32;
-  --bg-card-hover: #1a2340;
-  --bg-sidebar: #0c1122;
-  --bg-input: #1a2240;
-  --bg-modal-overlay: rgba(0, 0, 0, 0.6);
+  /* Colors — Professional Light Theme */
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F1F5F9;
+  --bg-sidebar: #1E293B;
+  --bg-input: #F1F5F9;
+  --bg-modal-overlay: rgba(15, 23, 42, 0.5);
 
-  --surface-glass: rgba(255, 255, 255, 0.03);
-  --surface-glass-hover: rgba(255, 255, 255, 0.06);
+  --surface-glass: rgba(37, 99, 235, 0.03);
+  --surface-glass-hover: rgba(37, 99, 235, 0.06);
 
-  --border-primary: rgba(255, 255, 255, 0.06);
-  --border-focus: #6366f1;
-  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-primary: #E2E8F0;
+  --border-focus: #2563EB;
+  --border-subtle: #F1F5F9;
 
-  /* Accent Colors */
-  --accent-primary: #6366f1;
-  --accent-primary-hover: #818cf8;
-  --accent-secondary: #8b5cf6;
-  --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-  --accent-gradient-hover: linear-gradient(135deg, #818cf8, #a78bfa);
+  /* Accent Colors — Royal Blue */
+  --accent-primary: #2563EB;
+  --accent-primary-hover: #1D4ED8;
+  --accent-secondary: #3B82F6;
+  --accent-gradient: linear-gradient(135deg, #2563EB, #3B82F6);
+  --accent-gradient-hover: linear-gradient(135deg, #1D4ED8, #2563EB);
 
   /* Status Colors */
-  --success: #22c55e;
+  --success: #22C55E;
   --success-bg: rgba(34, 197, 94, 0.1);
-  --warning: #f59e0b;
+  --warning: #F59E0B;
   --warning-bg: rgba(245, 158, 11, 0.1);
-  --danger: #ef4444;
-  --danger-bg: rgba(239, 68, 68, 0.1);
-  --info: #3b82f6;
-  --info-bg: rgba(59, 130, 246, 0.1);
+  --danger: #EF4444;
+  --danger-bg: rgba(239, 68, 68, 0.08);
+  --info: #2563EB;
+  --info-bg: rgba(37, 99, 235, 0.08);
 
-  /* Text Colors */
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-on-accent: #ffffff;
+  /* Text Colors — Midnight Navy */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --text-on-accent: #FFFFFF;
+
+  /* Sidebar-specific text (light text on dark sidebar) */
+  --sidebar-text: #CBD5E1;
+  --sidebar-text-muted: #64748B;
+  --sidebar-text-active: #FFFFFF;
+  --sidebar-accent-bg: rgba(37, 99, 235, 0.2);
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -73,10 +79,10 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.12);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -133,12 +139,12 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.15);
   border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.25);
 }
 
 /* ── Layout ── */
@@ -278,8 +284,8 @@ a:hover {
 }
 
 .sidebar-link.active {
-  background: rgba(99, 102, 241, 0.12);
-  color: var(--accent-primary);
+  background: var(--sidebar-accent-bg);
+  color: var(--sidebar-text-active);
 }
 
 .sidebar-link .icon {
@@ -302,7 +308,7 @@ a:hover {
   left: var(--sidebar-width);
   right: 0;
   height: var(--topbar-height);
-  background: rgba(15, 22, 41, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-primary);
@@ -479,33 +485,33 @@ a:hover {
 }
 
 .stat-icon.indigo {
-  background: rgba(99, 102, 241, 0.12);
-  color: #818cf8;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563EB;
 }
 
 .stat-icon.emerald {
-  background: rgba(16, 185, 129, 0.12);
-  color: #34d399;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22C55E;
 }
 
 .stat-icon.amber {
-  background: rgba(245, 158, 11, 0.12);
-  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
 }
 
 .stat-icon.rose {
-  background: rgba(244, 63, 94, 0.12);
-  color: #fb7185;
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
 }
 
 .stat-icon.sky {
-  background: rgba(14, 165, 233, 0.12);
-  color: #38bdf8;
+  background: rgba(37, 99, 235, 0.08);
+  color: #3B82F6;
 }
 
 .stat-icon.violet {
-  background: rgba(139, 92, 246, 0.12);
-  color: #a78bfa;
+  background: rgba(37, 99, 235, 0.06);
+  color: #1D4ED8;
 }
 
 .stat-info {
@@ -549,12 +555,12 @@ a:hover {
 .btn-primary {
   background: var(--accent-gradient);
   color: white;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
 }
 
 .btn-primary:hover {
   background: var(--accent-gradient-hover);
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
   transform: translateY(-1px);
 }
 
@@ -729,7 +735,7 @@ table {
 }
 
 thead {
-  background: rgba(255, 255, 255, 0.02);
+  background: #F8FAFC;
 }
 
 th {
