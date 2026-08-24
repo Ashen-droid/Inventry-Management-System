@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { apiFetch } from '../api/api'
-import { LuBrain, LuTrendingUp, LuTrendingDown, LuPackageCheck, LuBarChart3 } from 'react-icons/lu'
+import { LuBrain, LuTrendingUp, LuTrendingDown, LuPackageCheck, LuChartBar } from 'react-icons/lu'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 export default function AIInsights() {
@@ -129,7 +129,7 @@ export default function AIInsights() {
 
       {/* Sales Prediction */}
       <div className="ai-card">
-        <h3><LuBarChart3 style={{ color: 'var(--accent-primary)' }} /> Sales Prediction</h3>
+        <h3><LuChartBar style={{ color: 'var(--accent-primary)' }} /> Sales Prediction</h3>
         <div style={{ display: 'flex', gap: 'var(--space-3)', marginBottom: 'var(--space-4)', alignItems: 'flex-end' }}>
           <div className="form-group" style={{ flex: 1 }}>
             <label className="form-label">Select Product</label>

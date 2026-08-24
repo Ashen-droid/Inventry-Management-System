@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { apiFetch } from '../api/api'
 import {
-  LuPackage, LuAlertTriangle, LuXCircle, LuDollarSign,
+  LuPackage, LuTriangleAlert, LuCircleX, LuDollarSign,
   LuTrendingUp, LuWallet
 } from 'react-icons/lu'
 import {
@@ -64,14 +64,14 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon amber"><LuAlertTriangle /></div>
+          <div className="stat-icon amber"><LuTriangleAlert /></div>
           <div className="stat-info">
             <span className="stat-label">Low Stock</span>
             <span className="stat-value">{stats?.low_stock_items || 0}</span>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon rose"><LuXCircle /></div>
+          <div className="stat-icon rose"><LuCircleX /></div>
           <div className="stat-info">
             <span className="stat-label">Out of Stock</span>
             <span className="stat-value">{stats?.out_of_stock || 0}</span>
@@ -159,12 +159,12 @@ export default function Dashboard() {
       {/* Low Stock Alerts */}
       {lowStock.length > 0 && (
         <div className="alerts-section">
-          <h3><LuAlertTriangle style={{ color: 'var(--warning)' }} /> Low Stock Alerts</h3>
+          <h3><LuTriangleAlert style={{ color: 'var(--warning)' }} /> Low Stock Alerts</h3>
           <div className="alert-cards">
             {lowStock.map(p => (
               <div key={p.product_id} className={`alert-card ${p.status === 'OUT_OF_STOCK' ? 'danger' : 'warning'}`}>
                 <span className="alert-icon">
-                  {p.status === 'OUT_OF_STOCK' ? <LuXCircle style={{ color: 'var(--danger)' }} /> : <LuAlertTriangle style={{ color: 'var(--warning)' }} />}
+                  {p.status === 'OUT_OF_STOCK' ? <LuCircleX style={{ color: 'var(--danger)' }} /> : <LuTriangleAlert style={{ color: 'var(--warning)' }} />}
                 </span>
                 <div className="alert-info">
                   <div className="alert-name">{p.name}</div>

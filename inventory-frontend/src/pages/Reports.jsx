@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { apiFetch } from '../api/api'
 import {
-  LuBarChart3, LuShoppingCart, LuClipboardList,
+  LuChartBar, LuShoppingCart, LuClipboardList,
   LuPackage, LuTrendingUp, LuDownload
 } from 'react-icons/lu'
 

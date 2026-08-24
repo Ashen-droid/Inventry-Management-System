@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { clearAuth, getUser } from '../api/api'
 import {
   LuLayoutDashboard, LuPackage, LuTags, LuTruck, LuUsers,
-  LuShoppingCart, LuClipboardList, LuBarChart3, LuBrain,
+  LuShoppingCart, LuClipboardList, LuChartBar, LuBrain,
   LuActivity, LuLogOut, LuBoxes
 } from 'react-icons/lu'
 
@@ -26,7 +26,7 @@ export default function Sidebar() {
     { label: 'Sales', icon: <LuShoppingCart />, path: '/sales' },
     { label: 'Purchases', icon: <LuClipboardList />, path: '/purchases' },
     { section: 'ANALYTICS' },
-    { label: 'Reports', icon: <LuBarChart3 />, path: '/reports' },
+    { label: 'Reports', icon: <LuChartBar />, path: '/reports' },
     { label: 'AI Insights', icon: <LuBrain />, path: '/ai-insights' },
   ]
 
