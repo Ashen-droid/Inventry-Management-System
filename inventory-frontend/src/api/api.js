@@ -75,7 +75,17 @@ export async function apiFetch(endpoint, options = {}) {
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({ detail: 'Request failed' }));
-    throw new Error(err.detail || 'Request failed');
+    // FastAPI validation errors return detail as an array of objects
+    let message = 'Request failed';
+    if (err.detail) {
+      if (typeof err.detail === 'string') {
+        message = err.detail;
+      } else if (Array.isArray(err.detail)) {
+        // e.g. [{loc: ['body','price'], msg: 'field required', type: ...}]
+        message = err.detail.map(e => `${e.loc?.slice(-1)[0] ?? ''}: ${e.msg}`).join(', ');
+      }
+    }
+    throw new Error(message);
   }
 
   // Handle downloads (PDF, Excel, CSV)

@@ -54,7 +54,7 @@ export default function Products() {
       setNewCategoryName('')
       setTimeout(() => newCatInputRef.current?.focus(), 50)
     } else {
-      setForm({ ...form, category_id: e.target.value })
+      setForm(prev => ({ ...prev, category_id: e.target.value }))
     }
   }
 
@@ -68,7 +68,7 @@ export default function Products() {
       })
       const updated = await apiFetch('/categories/')
       setCategories(updated)
-      setForm({ ...form, category_id: String(created.category_id) })
+      setForm(prev => ({ ...prev, category_id: String(created.category_id) }))
       setAddingCategory(false)
       setNewCategoryName('')
     } catch (err) {
@@ -89,7 +89,7 @@ export default function Products() {
       setNewSupplierForm({ name: '', company: '' })
       setTimeout(() => newSupInputRef.current?.focus(), 50)
     } else {
-      setForm({ ...form, supplier_id: e.target.value })
+      setForm(prev => ({ ...prev, supplier_id: e.target.value }))
     }
   }
 
@@ -107,7 +107,7 @@ export default function Products() {
       })
       const updated = await apiFetch('/suppliers/')
       setSuppliers(updated)
-      setForm({ ...form, supplier_id: String(created.supplier_id) })
+      setForm(prev => ({ ...prev, supplier_id: String(created.supplier_id) }))
       setAddingSupplier(false)
       setNewSupplierForm({ name: '', company: '' })
     } catch (err) {
@@ -156,8 +156,12 @@ export default function Products() {
   }
 
   const handleSave = async () => {
+    // Frontend validation
+    if (!form.name.trim()) return alert('Product name is required')
+    if (!form.price || isNaN(parseFloat(form.price))) return alert('Selling Price is required')
+
     const body = {
-      name: form.name,
+      name: form.name.trim(),
       description: form.description || null,
       price: parseFloat(form.price),
       cost_price: form.cost_price ? parseFloat(form.cost_price) : null,
