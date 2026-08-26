@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { apiFetch } from '../api/api'
 import Modal from '../components/Modal'
-import { LuPlus, LuPencil, LuTrash2, LuSearch, LuPackage, LuBarcode, LuQrCode } from 'react-icons/lu'
+import { LuPlus, LuPencil, LuTrash2, LuSearch, LuPackage, LuBarcode, LuQrCode, LuCheck, LuX } from 'react-icons/lu'
 
 export default function Products() {
   const [products, setProducts] = useState([])
@@ -17,6 +17,15 @@ export default function Products() {
     name: '', description: '', price: '', cost_price: '',
     quantity: '', low_stock_threshold: '5', category_id: '', supplier_id: ''
   })
+  const [addingCategory, setAddingCategory] = useState(false)
+  const [newCategoryName, setNewCategoryName] = useState('')
+  const [savingCategory, setSavingCategory] = useState(false)
+  const newCatInputRef = useRef(null)
+
+  const [addingSupplier, setAddingSupplier] = useState(false)
+  const [newSupplierForm, setNewSupplierForm] = useState({ name: '', company: '' })
+  const [savingSupplier, setSavingSupplier] = useState(false)
+  const newSupInputRef = useRef(null)
 
   useEffect(() => {
     loadData()
@@ -37,6 +46,80 @@ export default function Products() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleCategoryChange = (e) => {
+    if (e.target.value === '__add_new__') {
+      setAddingCategory(true)
+      setNewCategoryName('')
+      setTimeout(() => newCatInputRef.current?.focus(), 50)
+    } else {
+      setForm({ ...form, category_id: e.target.value })
+    }
+  }
+
+  const handleSaveNewCategory = async () => {
+    if (!newCategoryName.trim()) return
+    setSavingCategory(true)
+    try {
+      const created = await apiFetch('/categories/', {
+        method: 'POST',
+        body: JSON.stringify({ name: newCategoryName.trim(), description: '' }),
+      })
+      const updated = await apiFetch('/categories/')
+      setCategories(updated)
+      setForm({ ...form, category_id: String(created.category_id) })
+      setAddingCategory(false)
+      setNewCategoryName('')
+    } catch (err) {
+      alert(err.message)
+    } finally {
+      setSavingCategory(false)
+    }
+  }
+
+  const handleCancelNewCategory = () => {
+    setAddingCategory(false)
+    setNewCategoryName('')
+  }
+
+  const handleSupplierChange = (e) => {
+    if (e.target.value === '__add_new_sup__') {
+      setAddingSupplier(true)
+      setNewSupplierForm({ name: '', company: '' })
+      setTimeout(() => newSupInputRef.current?.focus(), 50)
+    } else {
+      setForm({ ...form, supplier_id: e.target.value })
+    }
+  }
+
+  const handleSaveNewSupplier = async () => {
+    if (!newSupplierForm.name.trim()) return
+    setSavingSupplier(true)
+    try {
+      const created = await apiFetch('/suppliers/', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: newSupplierForm.name.trim(),
+          company: newSupplierForm.company.trim() || null,
+          email: null, phone: null, address: null,
+        }),
+      })
+      const updated = await apiFetch('/suppliers/')
+      setSuppliers(updated)
+      setForm({ ...form, supplier_id: String(created.supplier_id) })
+      setAddingSupplier(false)
+      setNewSupplierForm({ name: '', company: '' })
+    } catch (err) {
+      alert(err.message)
+    } finally {
+      setSavingSupplier(false)
+    }
+  }
+
+  const handleCancelNewSupplier = () => {
+    setAddingSupplier(false)
+    setNewSupplierForm({ name: '', company: '' })
   }
 
   const filteredProducts = products.filter(p => {
@@ -264,18 +347,103 @@ export default function Products() {
           </div>
           <div className="form-group">
             <label className="form-label">Category</label>
-            <select className="form-select" value={form.category_id} onChange={e => setForm({ ...form, category_id: e.target.value })}>
+            <select
+              className="form-select"
+              value={addingCategory ? '__add_new__' : form.category_id}
+              onChange={handleCategoryChange}
+            >
               <option value="">Select category</option>
               {categories.map(c => <option key={c.category_id} value={c.category_id}>{c.name}</option>)}
+              <option value="__add_new__">＋ Add New Category...</option>
             </select>
+            {addingCategory && (
+              <div style={{
+                display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-2)',
+                alignItems: 'center'
+              }}>
+                <input
+                  ref={newCatInputRef}
+                  className="form-input"
+                  style={{ flex: 1 }}
+                  placeholder="New category name"
+                  value={newCategoryName}
+                  onChange={e => setNewCategoryName(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') handleSaveNewCategory()
+                    if (e.key === 'Escape') handleCancelNewCategory()
+                  }}
+                />
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={handleSaveNewCategory}
+                  disabled={savingCategory || !newCategoryName.trim()}
+                  title="Save category"
+                >
+                  {savingCategory ? '...' : <LuCheck size={14} />}
+                </button>
+                <button
+                  className="btn btn-secondary btn-sm"
+                  onClick={handleCancelNewCategory}
+                  title="Cancel"
+                >
+                  <LuX size={14} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="form-group">
           <label className="form-label">Supplier</label>
-          <select className="form-select" value={form.supplier_id} onChange={e => setForm({ ...form, supplier_id: e.target.value })}>
+          <select
+            className="form-select"
+            value={addingSupplier ? '__add_new_sup__' : form.supplier_id}
+            onChange={handleSupplierChange}
+          >
             <option value="">Select supplier</option>
-            {suppliers.map(s => <option key={s.supplier_id} value={s.supplier_id}>{s.name}</option>)}
+            {suppliers.map(s => <option key={s.supplier_id} value={s.supplier_id}>{s.name}{s.company ? ` — ${s.company}` : ''}</option>)}
+            <option value="__add_new_sup__">＋ Add New Supplier...</option>
           </select>
+          {addingSupplier && (
+            <div style={{ marginTop: 'var(--space-2)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+              <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
+                <input
+                  ref={newSupInputRef}
+                  className="form-input"
+                  style={{ flex: 1 }}
+                  placeholder="Supplier name *"
+                  value={newSupplierForm.name}
+                  onChange={e => setNewSupplierForm({ ...newSupplierForm, name: e.target.value })}
+                  onKeyDown={e => { if (e.key === 'Escape') handleCancelNewSupplier() }}
+                />
+                <input
+                  className="form-input"
+                  style={{ flex: 1 }}
+                  placeholder="Company (optional)"
+                  value={newSupplierForm.company}
+                  onChange={e => setNewSupplierForm({ ...newSupplierForm, company: e.target.value })}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') handleSaveNewSupplier()
+                    if (e.key === 'Escape') handleCancelNewSupplier()
+                  }}
+                />
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={handleSaveNewSupplier}
+                  disabled={savingSupplier || !newSupplierForm.name.trim()}
+                  title="Save supplier"
+                >
+                  {savingSupplier ? '...' : <LuCheck size={14} />}
+                </button>
+                <button
+                  className="btn btn-secondary btn-sm"
+                  onClick={handleCancelNewSupplier}
+                  title="Cancel"
+                >
+                  <LuX size={14} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </Modal>
     </>
